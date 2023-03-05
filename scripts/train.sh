@@ -1,15 +1,16 @@
 python run_train.py \
 --diff_steps 2000 \
---lr 0.0001 \
---learning_steps 50000 \
---save_interval 10000 \
+--lr 0.001 \
+--learning_steps 500 \
+--save_interval 100 \
 --seed 102 \
 --noise_schedule sqrt \
 --hidden_dim 128 \
---bsz 2048 \
+--bsz 16 \
 --dataset qqp \
---data_dir {path-to-datasets} \
+--data_dir /content/ \
 --vocab bert \
 --seq_len 128 \
 --schedule_sampler lossaware \
---notes test-qqp
+--notes test-qqp \
+--resume_checkpoint /content/diffuseq_qqp_h128_lr0.0001_t2000_sqrt_lossaware_seed102_test_ori20221113-20:27:29/ema_0.9999_050000.pt
