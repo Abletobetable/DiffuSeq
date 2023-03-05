@@ -1,7 +1,7 @@
 python run_train.py \
 --diff_steps 2000 \
---lr 0.001 \
---learning_steps 500 \
+--lr 0.0001 \
+--learning_steps 51000 \
 --save_interval 100 \
 --seed 102 \
 --noise_schedule sqrt \
