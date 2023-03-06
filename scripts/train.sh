@@ -1,8 +1,9 @@
+#!/bin/bash
 python run_train.py \
 --diff_steps 2000 \
 --lr 0.0001 \
---learning_steps 51000 \
---save_interval 100 \
+--learning_steps 100000 \
+--save_interval 5000 \
 --seed 102 \
 --noise_schedule sqrt \
 --hidden_dim 128 \
@@ -13,4 +14,4 @@ python run_train.py \
 --seq_len 128 \
 --schedule_sampler lossaware \
 --notes test-qqp \
---resume_checkpoint /content/diffuseq_qqp_h128_lr0.0001_t2000_sqrt_lossaware_seed102_test_ori20221113-20:27:29/ema_0.9999_050000.pt
+--resume_checkpoint $1
