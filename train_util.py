@@ -9,6 +9,7 @@ import torch.distributed as dist
 from torch.nn.parallel.distributed import DistributedDataParallel as DDP
 from torch.optim import AdamW
 import io
+import wandb
 
 from diffuseq.utils import dist_util, logger
 from diffuseq.utils.fp16_util import (
@@ -50,7 +51,9 @@ class TrainLoop:
         gradient_clipping=-1.,
         eval_data=None,
         eval_interval=-1,
+        run = None,
     ):
+        self.run = run
         self.model = model
         self.diffusion = diffusion
         self.data = data
@@ -356,6 +359,10 @@ class TrainLoop:
                 with bf.BlobFile(bf.join(self.checkpoint_path, filename), "wb") as f: # DEBUG **
                     th.save(state_dict, f) # save locally
                     # pass # save empty
+
+                model_artifact = wandb.Artifact('diffuseq_model', type = 'model')
+                model_artifact.add_file(f'{self.checkpoint_path}/{filename}')
+                self.run.log_artifact(model_artifact)
 
         # save_checkpoint(0, self.master_params)
         for rate, params in zip(self.ema_rate, self.ema_params):

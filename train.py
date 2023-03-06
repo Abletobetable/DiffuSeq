@@ -81,7 +81,7 @@ def main():
         json.dump(args.__dict__, f, indent=2)
 
     if ('LOCAL_RANK' not in os.environ) or (int(os.environ['LOCAL_RANK']) == 0):
-        wandb.init(
+        run = wandb.init(
             project=os.getenv("WANDB_PROJECT", "DiffuSeq"),
             name=args.checkpoint_path,
         )
@@ -108,7 +108,8 @@ def main():
         checkpoint_path=args.checkpoint_path,
         gradient_clipping=args.gradient_clipping,
         eval_data=data_valid,
-        eval_interval=args.eval_interval
+        eval_interval=args.eval_interval,
+        run = run,
     ).run_loop()
 
 if __name__ == "__main__":
