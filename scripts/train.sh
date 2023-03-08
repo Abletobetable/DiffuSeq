@@ -2,7 +2,7 @@
 python run_train.py \
 --diff_steps 2000 \
 --lr 0.0001 \
---learning_steps 120000 \
+--learning_steps 150000 \
 --save_interval 5000 \
 --seed 102 \
 --noise_schedule sqrt \
